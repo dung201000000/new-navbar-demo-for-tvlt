@@ -1,0 +1,408 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Roboto:wght@100;300;400&display=swap');
+:root {
+    --primary-font: Montserrat,ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
+    --tab-font: "Open Sans Condensed", sans-serif;
+    --primary-color: #f9532d;
+    --primary-dark: #081229;
+    --primary-nav: #041a2d;
+    --primary-text: #fff;
+    --primary-link: #409eff;
+    --primary-link-hover: #1c9ded;
+    --color-blue: #409EFF;
+    --nav-text: #2998FF;
+    --primary-sucess: #00E676;
+    --primary-warning: #FFB300;
+    --color-purple: #8342f3;
+    --color-grey: #8b949e;
+    --color-green: #26d23d;
+    --color-light-green: lightgreen;
+    --text-color: #444; /* Màu chữ mặc định cho nav */
+    --icon-color: #555; /* Màu icon mặc định cho nav */
+    --transition-speed: 0.3s; /* Tốc độ hiệu ứng chuyển đổi */
+    --navbar-horizontal-padding: 30px; /* Đệm ngang (trái/phải) của navbar */
+    
+    --glass-background: rgba(255, 255, 255, 0.15); /* Nền trong suốt mờ của navbar */
+    --glass-border: rgba(255, 255, 255, 0.25); /* Viền mờ của navbar */
+    --glass-shadow: rgba(0, 0, 0, 0.2); /* Bóng đổ nhẹ của navbar */
+    --blur-amount: 15px; /* Độ mờ ảo của hiệu ứng kính */
+    --navbar-border-radius: 50px; /* Độ bo tròn của navbar tổng thể */
+
+    /* Các biến cho hiệu ứng khi hover/active */
+    --item-hover-background: rgba(255, 255, 255, 0.35); /* Nền của mục khi hover */
+    --item-hover-border: rgba(255, 255, 255, 0.4); /* Viền của mục khi hover */
+    --item-hover-shadow: rgba(0, 0, 0, 0.3); /* Bóng đổ của mục khi hover */
+    --item-blur-amount: 20px; /* Độ mờ của mục khi hover (hơi mờ hơn navbar) */
+
+    /* Màu chữ và icon chung cho navbar */
+    --text-color-default: #f0f0f0; /* Màu chữ trắng mặc định */
+    --icon-color-default: #e0e0e0; /* Màu icon trắng mặc định */
+    --text-color-hover: #333; /* Màu chữ khi hover (chuyển sang màu tối) */
+    --icon-color-hover: #333; /* Màu icon khi hover (chuyển sang màu tối) */
+
+    /* Kích thước mục khi là hình tròn/bầu dục khi hover */
+    --item-min-width-on-hover: 60px; /* Chiều rộng tối thiểu khi hover */
+    --item-height-on-hover: 60px; /* Chiều cao khi hover */
+
+    /* NEW: Variables for dynamic light effect */
+    --hover-light-color: rgba(255, 255, 255, 0.5); /* Màu của điểm sáng */
+    --hover-light-size: 150px; /* Kích thước của điểm sáng */
+    --hover-bg-color-transparent: rgba(255, 255, 255, 0.1); /* Nền trong suốt hơn khi hover/active */
+}
+
+/* -- Thiết lập chung cho body và các phần tử cơ bản -- */
+* {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    box-sizing: border-box; /* Rất quan trọng để tránh lỗi kích thước */
+}
+
+body {
+    font-family: var(--primary-font);
+    background-color: var(--primary-dark);
+    color: #fff;
+}
+
+a {
+    color: var(--primary-link);
+    text-decoration: none;
+    transition: color var(--transition-speed); /* Thêm transition cho màu link chung */
+}
+
+a:hover {
+    color: var(--primary-link-hover);
+    text-decoration: none; /* Bỏ gạch chân khi hover cho toàn bộ link nếu không muốn */
+}
+
+/* Nav */
+@keyframes navani {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--primary-nav);
+  box-shadow: 0 5px 17px rgba(127, 127, 127, 0.3);
+  padding: 0.3rem 2rem;
+}
+
+.logo {
+  animation: navani 1s ease forwards;
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+}
+
+/* -- Thiết lập cho topnav -- */
+.topnav {
+    background-color: var(--glass-background);
+    backdrop-filter: blur(var(--blur-amount));
+    -webkit-backdrop-filter: blur(var(--blur-amount));
+
+    border: 1px solid var(--glass-border);
+    border-radius: var(--navbar-border-radius);
+    box-shadow: 
+        0 4px 12px var(--glass-shadow), /* Bóng đổ hiện có */
+        0 -2px 8px rgba(255, 255, 255, 0.3); /* Ánh sáng viền trên (màu trắng mờ) */ 
+
+    display: flex;
+    justify-content: center; /* Căn giữa các mục */
+    align-items: center;
+    padding: 10px var(--navbar-horizontal-padding);
+    margin: 20px auto;
+    max-width: fit-content; /* Navbar sẽ ôm sát nội dung hơn */
+    overflow: hidden;
+    position: relative;
+    z-index: 1000;
+    transition: all var(--transition-speed) ease-in-out;
+}
+
+/* -- Kiểu dáng cho từng mục (section) trong topnav -- */
+.topnav .section {
+    position: relative;
+    padding: 0; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.topnav .section a {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Căn giữa cả icon và text theo chiều ngang */
+    text-decoration: none;
+    color: var(--text-color-default);
+    font-weight: 500;
+    font-size: 1em;
+    padding: 10px 20px; /* Padding để tạo hình chữ nhật dài */
+    border-radius: 25px; /* Bo tròn vừa phải cho hình chữ nhật dài */
+    
+    background-color: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    flex-shrink: 0;
+    flex-grow: 0;
+    
+    transition: all var(--transition-speed) ease-in-out;
+
+    /* NEW: Default custom properties for mouse coordinates */
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+}
+
+.topnav .section a:hover {
+    background-color: var(--hover-bg-color-transparent); /* Nền trong suốt hơn */
+    /* NEW: Radial gradient for the light effect, positioned by JS */
+    background-image: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--hover-light-color) 0%, transparent var(--hover-light-size));
+    background-blend-mode: overlay; /* Chế độ hòa trộn cho hiệu ứng ánh sáng */
+
+    backdrop-filter: blur(var(--item-blur-amount));
+    -webkit-backdrop-filter: blur(var(--item-blur-amount));
+    border: 1px solid var(--item-hover-border);
+    border-radius: var(--navbar-border-radius);
+    /* NEW: Điều chỉnh box-shadow cho hiệu ứng glow kết hợp */
+    box-shadow:
+        0 6px 16px var(--item-hover-shadow), /* Bóng đổ hiện có */
+        0 0 15px rgba(255, 255, 255, 0.5); /* Ánh sáng mạnh hơn, lan tỏa hơn khi hover */
+        /* Tùy chọn: inset 0 0 10px rgba(255, 255, 255, 0.3); */ /* Ánh sáng bên trong */
+
+    color: var(--text-color-hover);
+    transform: translateY(-2px); /* Nhấc nhẹ lên */
+    z-index: 1001;
+    position: relative;
+    /* Điều chỉnh kích thước và căn giữa nội dung khi hover */
+    min-width: var(--item-min-width-on-hover); /* Chiều rộng tối thiểu khi hover */
+    height: var(--item-height-on-hover); /* Chiều cao cố định */
+    flex-direction: column; /* Xếp icon và chữ theo chiều dọc */
+    padding: 5px 10px; /* Điều chỉnh padding cho hình tròn/bầu dục */
+    text-align: center;
+    overflow: hidden; /* NEW: Đảm bảo gradient không tràn ra ngoài */
+}
+
+/* Kiểu dáng cho mục menu đang hoạt động */
+.topnav .section a.active {
+    background-color: var(--hover-bg-color-transparent); /* Nền trong suốt hơn */
+    backdrop-filter: blur(var(--item-blur-amount));
+    -webkit-backdrop-filter: blur(var(--item-blur-amount));
+    border: 1px solid var(--item-hover-border);
+    border-radius: var(--navbar-border-radius);
+    /* NEW: Điều chỉnh box-shadow cho active state */
+    box-shadow:
+        0 6px 16px var(--item-hover-shadow), /* Bóng đổ chính */
+        inset 0 0 10px rgba(255, 255, 255, 0.4), /* Ánh sáng bên trong */
+        0 0 10px rgba(255, 255, 255, 0.6); /* Ánh sáng bên ngoài mạnh hơn cho active */
+    color: var(--text-color-hover); /* Màu chữ khi active */
+    transform: translateY(-2px); /* Nhấc nhẹ lên */
+    z-index: 1001;
+    position: relative; /* Đảm bảo nó hoạt động đúng với z-index, v.v. */
+    /* Nếu bạn muốn giữ nguyên hình dạng bầu dục/tròn khi active (giống như hover) */
+    min-width: var(--item-min-width-on-hover);
+    height: var(--item-height-on-hover);
+    flex-direction: column;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+/* -- Kiểu dáng cho icon trong link -- */
+.topnav .section a span:not(.text-label) { /* Chọn icon */
+    margin-right: 8px; /* Khoảng cách giữa icon và chữ mặc định */
+    font-size: 1.3em;
+    color: var(--icon-color-default);
+    transition: color var(--transition-speed) ease-in-out, margin var(--transition-speed) ease-in-out;
+}
+
+.topnav .section a:hover span:not(.text-label) {
+    color: var(--icon-color-hover);
+    margin-right: 0; /* Xóa margin-right khi hover */
+    margin-bottom: 5px; /* Thêm margin-bottom để icon và chữ cách nhau khi xếp dọc */
+}
+
+.topnav .section a.active span:not(.text-label) {
+    color: var(--icon-color-hover);
+    margin-right: 0;
+    margin-bottom: 5px;
+}
+
+
+/* -- Kiểu dáng cho phần văn bản -- */
+.topnav .section a .text-label {
+    white-space: nowrap; /* Ngăn văn bản bị ngắt dòng */
+    overflow: hidden; /* Ẩn phần văn bản tràn ra */
+    text-overflow: ellipsis; /* Hiển thị dấu ba chấm nếu văn bản bị cắt */
+    transition: color var(--transition-speed) ease-in-out, opacity var(--transition-speed) ease-in-out;
+    opacity: 1; /* Đảm bảo văn bản luôn hiển thị */
+    color: var(--text-color-default); /* Màu chữ mặc định */
+}
+
+.topnav .section a:hover .text-label {
+    color: var(--text-color-hover); /* Chuyển màu chữ khi hover */
+    opacity: 1; /* Đảm bảo văn bản hiển thị khi hover */
+}
+
+.topnav .section a.active .text-label {
+    color: var(--text-color-hover);
+    opacity: 1;
+}
+
+/* -- Hiệu ứng cho nút menu (cho mobile) và nút ngôn ngữ -- */
+.icon {
+  display: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.lang {
+  color: #fff;
+  background: var(--glass-background);
+  backdrop-filter: blur(var(--blur-amount));
+  -webkit-backdrop-filter: blur(var(--blur-amount));
+  border-radius: var(--navbar-border-radius);
+  padding: 10px 15px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 2px 8px var(--glass-shadow);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease-in-out;
+  z-index: 1001;
+}
+
+.lang:hover {
+    background-color: var(--item-hover-background);
+    backdrop-filter: blur(var(--item-blur-amount));
+    -webkit-backdrop-filter: blur(var(--item-blur-amount));
+    border: 1px solid var(--item-hover-border);
+    box-shadow: 0 4px 15px var(--item-hover-shadow);
+    color: var(--text-color-hover);
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .page-header {
+        position: fixed; /* Chuyển thành fixed */
+        bottom: 0;       /* Di chuyển xuống cuối màn hình */
+        top: auto;       /* Bỏ định vị top */
+        left: 0;         /* Kéo dài toàn bộ chiều rộng */
+        width: 100%;     /* Kéo dài toàn bộ chiều rộng */
+        padding: 10px 0; /* Điều chỉnh đệm cho thanh bottom bar */
+        background-color: var(--glass-background); /* Áp dụng hiệu ứng kính cho thanh fixed */
+        backdrop-filter: blur(var(--blur-amount));
+        -webkit-backdrop-filter: blur(var(--blur-amount));
+        border-top: 1px solid var(--glass-border); /* Viền trên */
+        box-shadow: 0 -4px 12px var(--glass-shadow), 0 -2px 8px rgba(255, 255, 255, 0.3); /* Bóng đổ trên */
+        z-index: 1000;   /* Đảm bảo nó nằm trên các nội dung khác */
+        display: flex;
+        justify-content: center; /* Căn giữa các mục điều hướng */
+        align-items: center;
+        border-radius: 0; /* Bỏ bo tròn cho thanh full-width */
+    }
+
+    .page-header .logo,
+    .page-header .lang,
+    .icon { /* Ẩn logo, nút ngôn ngữ và icon hamburger trên thanh điều hướng dưới cùng */
+        display: none !important; 
+    }
+
+    .topnav { /* Container chứa các mục điều hướng */
+        display: flex;
+        flex-direction: row; /* Bố cục ngang cho thanh bottom nav */
+        justify-content: space-around; /* Phân bổ đều các mục */
+        align-items: center;
+        width: 100%; /* Chiếm toàn bộ chiều rộng của phần tử cha */
+        max-height: none; /* Không giới hạn chiều cao cho bố cục này */
+        padding: 0 10px; /* Thêm một số đệm cho các mục bên trong */
+        margin: 0; /* Bỏ margin */
+
+        /* Loại bỏ hiệu ứng kính/viền/bóng đổ riêng của .topnav vì .page-header đã có */
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        overflow: visible; /* Cho phép các section có overflow riêng */
+    }
+
+    /* Kiểu dáng cho từng mục điều hướng trong thanh bottom bar */
+    .topnav .section {
+        flex: 1; /* Mỗi section chiếm không gian bằng nhau */
+        text-align: center; /* Căn giữa nội dung trong section */
+        padding: 5px 0; /* Điều chỉnh đệm */
+        opacity: 1 !important; /* Luôn hiển thị, ghi đè opacity của lớp responsive */
+        transform: none !important; /* Bỏ transform, ghi đè transform của lớp responsive */
+        transition-delay: 0s !important; /* Bỏ độ trễ, ghi đè độ trễ của lớp responsive */
+    }
+
+    .topnav .section a {
+        display: flex;
+        flex-direction: column; /* Xếp icon và chữ theo chiều dọc */
+        align-items: center;
+        justify-content: center;
+        padding: 8px 0; /* Đệm cho icon/chữ bên trong link */
+        color: var(--text-color-default); /* Màu chữ mặc định */
+        font-size: 0.9em; /* Điều chỉnh font size */
+        border-radius: 5px; /* Bo tròn nhẹ cho các nút riêng lẻ */
+        transition: background-color var(--transition-speed) ease-in-out, color var(--transition-speed) ease-in-out;
+        width: auto; /* Cho phép nội dung xác định chiều rộng hoặc flex để lấp đầy */
+        min-width: unset; /* Đặt lại min-width từ desktop hover */
+        height: auto; /* Đặt lại chiều cao từ desktop hover */
+    }
+
+    .topnav .section a:hover,
+    .topnav .section a.active {
+        background-color: rgba(255, 255, 255, 0.2); /* Nền sáng nhẹ khi hover/active */
+        color: var(--text-color-hover); /* Thay đổi màu chữ */
+        transform: none; /* Bỏ hiệu ứng nhấc lên khi hover */
+
+        /* NEW: No dynamic gradient on mobile for simplicity */
+        background-image: none; 
+        background-blend-mode: normal;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Simple glow for mobile active/hover */
+    }
+
+    .topnav .section a span:not(.text-label) {
+        margin-right: 0; /* No margin to the right of icon */
+        margin-bottom: 3px; /* Space between icon and text */
+        font-size: 1.6em; /* Larger icon size */
+        color: var(--icon-color-default); /* Default icon color */
+    }
+    
+    .topnav .section a:hover span:not(.text-label),
+    .topnav .section a.active span:not(.text-label) {
+        color: var(--icon-color-hover); /* Icon color on hover/active */
+    }
+
+    .topnav .section a .text-label {
+        white-space: nowrap; /* Keep text on one line */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--text-color-default); /* Default text color */
+    }
+    .topnav .section a:hover .text-label,
+    .topnav .section a.active .text-label {
+        color: var(--text-color-hover); /* Text color on hover/active */
+    }
+
+    /* Override any specific responsive rules that conflict */
+    .topnav.responsive {
+        max-height: none !important; /* No expansion for this layout */
+        padding: 0 10px !important; /* Keep padding consistent */
+    }
+}
